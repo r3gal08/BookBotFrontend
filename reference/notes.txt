@@ -1,0 +1,13 @@
+# Cleaning flutter packages
+flutter clean
+flutter pub get
+
+# To remove flutter cache,
+flutter pub cache clean
+
+# To get this app working I had  to run the following,
+flutter pub upgrade win32
+flutter run lib/main_development.dart   # Specifically had to run from cmdline like this and select linux
+
+# Testing if ollama is up....
+curl --location 'http://localhost:11434/'
