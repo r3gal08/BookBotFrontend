@@ -9,10 +9,11 @@ const String customPathKey = 'CustomPathKey';
 const String customModelKey = 'CustomModelKey';
 
 // DEFAULT
-const String defaultUrl = 'localhost';
+// const String defaultUrl = 'localhost';
+const String defaultUrl = '192.168.4.153';
 const int defaultPort = 11434;
 const String defaultPath = '/api/generate';
-const String defaultModel = 'llama2';
+const String defaultModel = 'llama3.2';
 
 class StoreService {
   late SharedPreferences preferences;
@@ -47,7 +48,7 @@ class StoreService {
       // IF TESTING ON ANDROID EMULATOR
       // ELSE USE 127.0.0.1
       if (Platform.isAndroid) {
-        return '10.0.2.2';
+        return '192.168.4.153';
       } else if (Platform.isIOS) {
         return '127.0.0.1';
       } else {

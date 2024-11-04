@@ -5,5 +5,5 @@ class AppEnvironments {
 }
 
 class LLMModels {
-  static String defaultModel = 'llama2';
+  static String defaultModel = 'llama3.2';
 }

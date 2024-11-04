@@ -130,14 +130,14 @@ class _ChatPageState extends State<ChatPage> {
                           return ListTile(
                             title: Text(
                               messages[index],
-                              style: const TextStyle(color: Colors.black),
+                              style: const TextStyle(color: Colors.blue),
                             ),
                           );
                         }
                         return ListTile(
                           title: Text(
                             messages[index],
-                            style: const TextStyle(color: Colors.grey),
+                            style: const TextStyle(color: Colors.blue),
                           ),
                         );
                       });

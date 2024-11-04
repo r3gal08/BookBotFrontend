@@ -1,12 +1,5 @@
-# ollama_flutter_app
+# Book Bot Frontend
 
-Ollama + Flutter for Affordable ChatGPT App
+Work in progres frontend for my book bot project
 
-https://kush373.medium.com/integrating-ollamas-apis-with-flutter-building-a-conversational-ai-app-local-chatgpt-flutter-42346513d033
-
-# demo
-
-![Ollama Flitter App Home](https://github.com/Lavkushwaha/ollama_local_flutter_app/blob/main/olama-into.gif)
-![Ollama Flitter App Settings](https://github.com/Lavkushwaha/ollama_local_flutter_app/blob/main/ollama-settings.gif)
-![Ollama Flitter App Chat](https://github.com/Lavkushwaha/ollama_local_flutter_app/blob/main/ollama-query.gif)
-
+Largely based on: https://github.com/Lavkushwaha/ollama_local_flutter_app?tab=readme-ov-file
