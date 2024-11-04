@@ -23,7 +23,7 @@ class _ChatPageState extends State<ChatPage> {
 
   bool _isUserDragging = false;
   String userName = 'User';
-  String gpt = 'GPT';
+  String gpt = 'Bot';
 
   List<String> messages = [];
   final newMessage = [];
@@ -73,7 +73,7 @@ class _ChatPageState extends State<ChatPage> {
                     //   strokeWidth: 1,
                     // ),
                     child: SpinKitPulse(
-                      color: Colors.purple,
+                      color: Colors.green,
                       size: 50.0,
                     ));
               } else {
@@ -130,14 +130,14 @@ class _ChatPageState extends State<ChatPage> {
                           return ListTile(
                             title: Text(
                               messages[index],
-                              style: const TextStyle(color: Colors.blue),
+                              style: const TextStyle(color: Colors.green), // Recent text....
                             ),
                           );
                         }
                         return ListTile(
                           title: Text(
                             messages[index],
-                            style: const TextStyle(color: Colors.blue),
+                            style: const TextStyle(color: Colors.green),  // Text above....
                           ),
                         );
                       });
@@ -193,7 +193,7 @@ class _ChatPageState extends State<ChatPage> {
                   Expanded(
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Colors.black,  // Text box
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [
                           BoxShadow(
@@ -233,7 +233,7 @@ class _ChatPageState extends State<ChatPage> {
                           width: 40,
                           height: 40,
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: Colors.green,  // Button Outer circle
                             shape: BoxShape.circle,
                             boxShadow: [
                               BoxShadow(
@@ -247,12 +247,12 @@ class _ChatPageState extends State<ChatPage> {
                           child: Center(
                             child: (snapshot.hasData && snapshot.data == true && mounted)
                                 ? const SpinKitPulse(
-                                    color: Colors.purple,
+                                    color: Colors.green,
                                     size: 50.0,
                                   )
                                 : const Icon(
                                     Icons.send,
-                                    color: Colors.purple,
+                                    color: Colors.black,  // Button Arrow
                                   ),
                           ),
                         ),

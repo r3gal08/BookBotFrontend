@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
         child: Stack(
           children: [
             SpinKitPulse(
-              color: Colors.purple,
+              color: Colors.green,
               size: 200.0,
               duration: Duration(seconds: 3),
             ),
