@@ -4,10 +4,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:ollama_flutter_app/src/router/app_router.dart';
 
 class MyApp extends StatelessWidget {
-  MyApp({
-    super.key,
-  });
+  MyApp({super.key,});
+
+  // Create instance of 'AppRouter'
   final AppRouter _appRouter = AppRouter();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(

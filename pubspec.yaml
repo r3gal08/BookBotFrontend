@@ -26,6 +26,10 @@ dependencies:
   ollama: ^1.0.2
   rxdart: ^0.27.7
   shared_preferences: ^2.2.2
+  provider: ^6.0.0
+  camera: ^0.11.0+2
+  permission_handler: ^11.3.1
+  path_provider: ^2.1.5
 
 dev_dependencies:
   auto_route_generator: ^7.3.2

@@ -1,3 +1,5 @@
+// Reference: https://medium.com/@antonio.tioypedro1234/flutter-auto-route-guide-9ac405e8a941
+
 import 'package:auto_route/auto_route.dart';
 import 'package:ollama_flutter_app/src/router/app_router.gr.dart';
 
@@ -20,6 +22,10 @@ class AppRouter extends $AppRouter {
         // SETTINGS PAGE
         AutoRoute(
           page: SettingsRoute.page,
+        ),
+        // // Camera PAGE
+        AutoRoute(
+          page: CameraRoute.page,
         ),
       ];
 }

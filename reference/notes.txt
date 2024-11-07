@@ -1,3 +1,6 @@
+# I've been running into weird issues every now and then with running ollama... Reinstall appears to fix the issue
+curl -fsSL https://ollama.com/install.sh | sh
+
 # Cleaning flutter packages
 flutter clean
 flutter pub get
@@ -11,3 +14,12 @@ flutter run lib/main_development.dart   # Specifically had to run from cmdline l
 
 # Testing if ollama is up....
 curl --location 'http://localhost:11434/'
+
+# Re-building app and generate code...
+flutter pub get
+flutter pub run build_runner build
+
+# Resolved issues before...
+flutter clean
+flutter pub cache repair
+
