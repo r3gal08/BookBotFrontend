@@ -1,3 +1,5 @@
+// Reference: https://kush373.medium.com/integrating-ollamas-apis-with-flutter-building-a-conversational-ai-app-local-chatgpt-flutter-42346513d033
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
