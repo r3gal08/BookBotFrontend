@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ollama_flutter_app/src/di/di.dart';
 import 'package:ollama_flutter_app/src/features/chat_feature/presentation/cubit/chat_cubit.dart';
+import 'package:ollama_flutter_app/src/router/app_router.gr.dart';
 import 'package:ollama_flutter_app/src/services/store_service.dart';
 import 'package:rxdart/subjects.dart';
 
@@ -196,7 +197,7 @@ class _ChatPageState extends State<ChatPage> {
                   Expanded(
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Colors.black,  // Text box
+                        color: Colors.black,  // Text box background color
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [
                           BoxShadow(
@@ -223,20 +224,30 @@ class _ChatPageState extends State<ChatPage> {
                     ),
                   ),
                   const SizedBox(width: 8.0),
+                  // Camera Button
+                  IconButton(
+                    icon: const Icon(Icons.camera_alt, color: Colors.green), // Camera icon color
+                    onPressed: () {
+                      // Navigate to a camera page or open camera functionality
+                      AutoRouter.of(context).push(const CameraRoute());
+                    },
+                  ),
+                  const SizedBox(width: 8.0),
+                  // Send Button
                   StreamBuilder<bool>(
                     stream: loadingController,
                     builder: (context, snapshot) {
                       return GestureDetector(
                         onTap: (snapshot.hasData && snapshot.data == true)
                             ? () {
-                                context.read<ChatCubit>().abortRequest();
-                              }
+                          context.read<ChatCubit>().abortRequest();
+                        }
                             : sendMessage,
                         child: Container(
                           width: 40,
                           height: 40,
                           decoration: BoxDecoration(
-                            color: Colors.green,  // Button Outer circle
+                            color: Colors.green,  // Send button background color
                             shape: BoxShape.circle,
                             boxShadow: [
                               BoxShadow(
@@ -250,13 +261,13 @@ class _ChatPageState extends State<ChatPage> {
                           child: Center(
                             child: (snapshot.hasData && snapshot.data == true && mounted)
                                 ? const SpinKitPulse(
-                                    color: Colors.green,
-                                    size: 50.0,
-                                  )
+                              color: Colors.green,
+                              size: 20.0,
+                            )
                                 : const Icon(
-                                    Icons.send,
-                                    color: Colors.black,  // Button Arrow
-                                  ),
+                              Icons.send,
+                              color: Colors.black,  // Send icon color
+                            ),
                           ),
                         ),
                       );
