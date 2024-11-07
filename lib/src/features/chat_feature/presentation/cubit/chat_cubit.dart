@@ -10,8 +10,8 @@ part 'chat_state.dart';
 
 @injectable
 class ChatCubit extends Cubit<ChatState> {
-  final GetChatResponseUsecase usecase;
-  StreamSubscription? _responseSubscription;
+  final GetChatResponseUsecase usecase;       // Will be used to fetch chat responses
+  StreamSubscription? _responseSubscription;  // Optional field that allows for the cancellation of subs when necessary
 
   ChatCubit(this.usecase) : super(ChatInitial());
 
@@ -19,11 +19,11 @@ class ChatCubit extends Cubit<ChatState> {
     _responseSubscription?.cancel();
     _responseSubscription = usecase.execute(userInput: userInput).listen(
       (response) {
-        if (response.done == false) {
-          emit(ChatLoading());
-          emit(ChatNewResponse(response));
-        } else {
-          emit(ChatLoaded(response));
+        if (response.done == false) {       // Checks if the response indicates an ongoing proces
+          emit(ChatLoading());              // Emits a loading state to the UI.
+          emit(ChatNewResponse(response));  // Emits a new chat response state with the current response
+        } else {                            // If response is complete...
+          emit(ChatLoaded(response));       // Emits a loaded state with the final response
         }
       },
       onError: (error) {

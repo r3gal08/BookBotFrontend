@@ -11,6 +11,7 @@ class GetChatResponseUsecase {
   //   return repository.getChatResponse(userInput: userInput);
   // }
 
+  // This method triggers the process of getting chat responses from the repository based on user input
   Stream<ChatResponseEntity> execute({required String userInput}) {
     return repository.getChatResponseStream(userInput: userInput);
   }

@@ -1,6 +1,9 @@
+// TODO: We likely want to create a similar data dir structure under our text_extract feature
+// This file contains the actual code that is responsible for directly interacting with the data provider.
+//  (which in this case is our language chat model)
+
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:ollama_flutter_app/src/di/di.dart';
 import 'package:ollama_flutter_app/src/features/chat_feature/domain/entity/chat_response_entity.dart';
@@ -118,7 +121,7 @@ class RemoteChatDatasource extends ChatDatasource {
       debugPrint(e.toString());
       rethrow;
     } finally {
-      // _client.close();
+      // _client.close(); // TODO: Un-comment?
     }
   }
 

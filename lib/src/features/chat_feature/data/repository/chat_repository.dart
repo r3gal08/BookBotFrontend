@@ -18,6 +18,8 @@ class ChatRepositoryImpl extends ChatRepository {
   //   //   return Left(ServerFailure(e.toString()));
   //   // }
   // }
+
+  // This is whats called when the chat app wants to send a message to the server...
   @override
   Stream<ChatResponseEntity> getChatResponseStream({required String userInput}) {
     return ds.getChatResponseFromServer(userInput: userInput).asBroadcastStream();

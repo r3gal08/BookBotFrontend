@@ -5,6 +5,7 @@ import 'package:ollama_flutter_app/src/router/app_router.gr.dart';
 class AppRouter extends $AppRouter {
   AppRouter();
 
+  // TODO: We will want to make our "camera" page here and route similar to this.
   @override
   List<AutoRoute> get routes => [
         // HOME PAGE
@@ -12,7 +13,6 @@ class AppRouter extends $AppRouter {
           page: HomeRoute.page,
           initial: true,
         ),
-
         // CHAT PAGE
         AutoRoute(
           page: ChatRoute.page,

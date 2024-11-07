@@ -7,6 +7,9 @@ import 'package:ollama_flutter_app/src/features/chat_feature/presentation/cubit/
 import 'package:ollama_flutter_app/src/services/store_service.dart';
 import 'package:rxdart/subjects.dart';
 
+// TODO: We will want to create either A) a camera functionality within this page or B) an entirely new "camera" page
+// TODO: Utilize existing camera code, integrate into here.....
+
 @RoutePage()
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
@@ -95,7 +98,7 @@ class _ChatPageState extends State<ChatPage> {
           children: [
             Expanded(
               child: BlocConsumer<ChatCubit, ChatState>(
-                listener: (context, state) {
+                listener: (context, state) {      // Updates UI based on different states...
                   if (state is ChatNewResponse) {
                     // Append partial response to the last user message
                     messages[messages.length - 1] += state.entity.response;
@@ -109,7 +112,7 @@ class _ChatPageState extends State<ChatPage> {
                     }
                   } else if (state is ChatLoaded) {
                     // Add concatenated response as a single message
-                    messages[messages.length - 1] += state.entity.response;
+                    messages[messages.length - 1] += state.entity.response;   // Actual message contents from entity object
                     messagesController.add(messages);
                     loadingController.add(false);
                   } else if (state is ChatError) {
@@ -120,7 +123,7 @@ class _ChatPageState extends State<ChatPage> {
                     loadingController.add(false);
                   }
                 },
-                builder: (context, state) {
+                builder: (context, state) { // Displays the chat messages in a ListView. Last 2 messages have green text, rest are red. Also automatically scrolls user to the bottom of page
                   return ListView.builder(
                       controller: scrollController,
                       physics: const AlwaysScrollableScrollPhysics(),
@@ -137,7 +140,7 @@ class _ChatPageState extends State<ChatPage> {
                         return ListTile(
                           title: Text(
                             messages[index],
-                            style: const TextStyle(color: Colors.green),  // Text above....
+                            style: const TextStyle(color: Colors.red),  // Text above....
                           ),
                         );
                       });
