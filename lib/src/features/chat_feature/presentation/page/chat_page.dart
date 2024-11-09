@@ -9,9 +9,9 @@ import 'package:ollama_flutter_app/src/features/chat_feature/presentation/cubit/
 import 'package:ollama_flutter_app/src/router/app_router.gr.dart';
 import 'package:ollama_flutter_app/src/services/store_service.dart';
 import 'package:rxdart/subjects.dart';
+import 'package:ollama_flutter_app/src/services/get_cameras_service.dart';
 
-// TODO: We will want to create either A) a camera functionality within this page or B) an entirely new "camera" page
-// TODO: Utilize existing camera code, integrate into here.....
+// TODO: There must be a program that just visualizes/builds the presentation portion of these files
 
 @RoutePage()
 class ChatPage extends StatefulWidget {
@@ -33,6 +33,8 @@ class _ChatPageState extends State<ChatPage> {
 
   List<String> messages = [];
   final newMessage = [];
+
+  final getCamerasService = getIt<GetCamerasService>();
 
   @override
   void initState() {
@@ -225,17 +227,24 @@ class _ChatPageState extends State<ChatPage> {
                       ),
                     ),
                   ),
-                  const SizedBox(width: 8.0),
                   // Camera Button
+                  const SizedBox(width: 8.0),
                   IconButton(
                     icon: const Icon(Icons.camera_alt, color: Colors.green), // Camera icon color
                     onPressed: () {
-                      // Navigate to a camera page or open camera functionality
-                      AutoRouter.of(context).push(const CameraRoute());
+                      if (getCamerasService.hasCameras) {
+                        // Navigate to the camera route if cameras are available
+                        context.router.push(CameraRoute(cameras: getCamerasService.cameras));
+                      } else {
+                        // Show an alert if no cameras are available
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text("No cameras available")),
+                        );
+                      }
                     },
                   ),
-                  const SizedBox(width: 8.0),
                   // Send Button
+                  const SizedBox(width: 8.0),
                   StreamBuilder<bool>(
                     stream: loadingController,
                     builder: (context, snapshot) {

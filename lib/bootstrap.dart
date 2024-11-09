@@ -4,8 +4,10 @@ import 'dart:developer';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ollama_flutter_app/src/di/di.dart';
+import 'package:ollama_flutter_app/src/features/camera_feature/presentation/cubit/camera_cubit.dart';
 import 'package:ollama_flutter_app/src/features/chat_feature/presentation/cubit/chat_cubit.dart';
 
+// TODO: Get a better understanding of this piece of code in general.....
 class AppBlocObserver extends BlocObserver {
   const AppBlocObserver();
 
@@ -24,13 +26,15 @@ class AppBlocObserver extends BlocObserver {
 }
 
 Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
+  // Initialize Flutter bindings and error handling
+  WidgetsFlutterBinding.ensureInitialized();
+
   FlutterError.onError = (details) {
     log(details.exceptionAsString(), stackTrace: details.stack);
     debugPrint(details.stack.toString());
   };
 
-  WidgetsFlutterBinding.ensureInitialized();
-
+  // Initialize Bloc observer for logging purposes
   Bloc.observer = const AppBlocObserver();
 
   // Add cross-flavor configuration here
@@ -43,7 +47,10 @@ Widget getBlocProviders(Widget child) {
     providers: [
       BlocProvider(
         create: (context) => getIt<ChatCubit>(),
-      )
+      ),
+      BlocProvider(
+        create: (context) => getIt<CameraCubit>(),    // TODO: Confirm this is valid....
+      ),
     ],
     child: child,
   );

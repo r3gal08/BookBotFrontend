@@ -26,3 +26,6 @@ flutter pub run build_runner build
 flutter clean
 flutter pub cache repair
 
+
+# Rebuild things
+flutter clean; flutter pub get; dart run build_runner build

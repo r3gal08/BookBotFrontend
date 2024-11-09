@@ -23,9 +23,13 @@ class AppRouter extends $AppRouter {
         AutoRoute(
           page: SettingsRoute.page,
         ),
-        // // Camera PAGE
+        // Camera PAGE
         AutoRoute(
           page: CameraRoute.page,
+        ),
+        // Image View PAGE
+        AutoRoute(
+          page: ImageViewRoute.page,
         ),
       ];
 }

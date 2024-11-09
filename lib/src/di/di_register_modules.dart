@@ -11,6 +11,7 @@ import 'package:ollama_flutter_app/src/features/chat_feature/data/repository/cha
 import 'package:ollama_flutter_app/src/features/chat_feature/domain/repository/chat_repository.dart';
 import 'package:ollama_flutter_app/src/services/store_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ollama_flutter_app/src/services/get_cameras_service.dart';
 
 @module
 abstract class RegisterModule {
@@ -23,6 +24,7 @@ abstract class RegisterModule {
   @singleton
   Future<SharedPreferences> get sharedPreferences async => await SharedPreferences.getInstance();
 
+  // (A lazy singleton creates an instance only when it is actually needed....)
   // // ABSTRACT CLASSES NEED TO IMPORT LIKE THIS WITH ACTUAL IMPLEMENTATION
   @lazySingleton
   ChatRepository get chatRepository => ChatRepositoryImpl(getIt());
@@ -33,6 +35,11 @@ abstract class RegisterModule {
   // SERVICE
   @lazySingleton
   StoreService get storeService => StoreService(getIt());
+
+  // CAMERAS
+  // Register CameraService as a lazy singleton
+  @lazySingleton
+  GetCamerasService get getCameraService => GetCamerasService()..initialize();
 
   @Environment('dev')
   @singleton

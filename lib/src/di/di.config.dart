@@ -23,6 +23,7 @@ import '../features/chat_feature/domain/repository/chat_repository.dart'
 import '../features/chat_feature/domain/usecase/get_chat_response_usecase.dart'
     as _i980;
 import '../features/chat_feature/presentation/cubit/chat_cubit.dart' as _i569;
+import '../services/get_cameras_service.dart' as _i816;
 import '../services/store_service.dart' as _i563;
 import 'di_register_modules.dart' as _i1036;
 
@@ -48,6 +49,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i994.ChatRepository>(() => registerModule.chatRepository);
     gh.lazySingleton<_i156.ChatDatasource>(() => registerModule.chatDatasource);
     gh.lazySingleton<_i563.StoreService>(() => registerModule.storeService);
+    gh.lazySingleton<_i816.GetCamerasService>(
+        () => registerModule.getCameraService);
     gh.lazySingleton<_i980.GetChatResponseUsecase>(
         () => _i980.GetChatResponseUsecase(gh<_i994.ChatRepository>()));
     gh.singleton<_i499.AppEndpoints>(
