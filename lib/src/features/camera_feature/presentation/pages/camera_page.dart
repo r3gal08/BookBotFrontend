@@ -122,7 +122,10 @@ class _CameraPageState extends State<CameraPage> {
         imageFile = picture; // Updates the state with the captured image file
       });
 
+      // TODO: Handle potential null pointer exception
       // Navigates to ImageViewPage to display the captured image
+      // ! == null assertion operator. Which tells dart that this value is not null at this point.
+      //    this of course runs the risk of causing a null pointer exception, and therfore we should handle this....
       // if (!context.mounted) return; // TODO: Confirm this is a valid thing to do before impl....
       context.router.push(ImageViewRoute(imagePath: imageFile!.path));
     } catch (e) {
