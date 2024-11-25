@@ -18,7 +18,7 @@ class CameraPage extends StatefulWidget {
   State<CameraPage> createState() => _CameraPageState();
 }
 
-// Note "_" makes the class private :)
+// Note: "_" makes the class private :)
 class _CameraPageState extends State<CameraPage> {
   // CameraController to manage camera operations like preview, capturing pictures
   late CameraController controller;
