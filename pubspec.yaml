@@ -9,6 +9,7 @@ version: 1.0.0+1
 environment:
   sdk: '>=3.3.0 <4.0.0'
 
+# TODO: Is the ollama package even ever used? We seemingly query the server natively
 dependencies:
   auto_route: ^7.8.4
   dartz: ^0.10.1

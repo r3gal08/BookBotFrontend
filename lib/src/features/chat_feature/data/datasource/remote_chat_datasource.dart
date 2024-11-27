@@ -1,4 +1,3 @@
-// TODO: We likely want to create a similar data dir structure under our text_extract feature
 // This file contains the actual code that is responsible for directly interacting with the data provider.
 //  (which in this case is our language chat model)
 
@@ -20,66 +19,6 @@ class RemoteChatDatasource extends ChatDatasource {
 
   late HttpClientRequest request;
 
-  // @override
-  // Stream<ChatResponseEntity> getChatResponseFromServer({required String userInput}) async* {
-  //   try {
-  //     HttpClientRequest request = await _client.post('localhost', 11434, '/api/generate');
-  //     Map<String, dynamic> jsonMap = {"model": "llama2", "prompt": "hi"};
-  //     String jsonString = json.encode(jsonMap);
-  //     List<int> bodyBytes = utf8.encode(jsonString);
-  //     request.add(bodyBytes);
-  //     HttpClientResponse response = await request.close();
-  //     final responseMessage = [];
-  //     final context = [];
-
-  //     await response.transform(utf8.decoder).listen((event) async* {
-  //       final resp = json.decode(event);
-  //       if (resp['done'] == false) {
-  //         yield ChatResponseEntity.fromJson(json.decode(event)['response']);
-  //         responseMessage.add(json.decode(event)['response'].toString());
-  //       } else {
-  //         context.add(resp['context']);
-  //       }
-  //     }).asFuture();
-
-  //     print(responseMessage.join(''));
-  //   } catch (e) {
-  //     print(e);
-  //     rethrow;
-  //   } finally {
-  //     _client.close();
-  //   }
-
-  //   // final url = getIt<AppEndpoints>().getChatUrl();
-  //   // final uri = Uri.parse(url);
-  //   // final request = await _client.postUrl(uri);
-
-  //   // // Set headers
-  //   // request.headers.contentType = ContentType.json;
-
-  //   // // Create request body
-  //   // final requestBody = {
-  //   //   "model": LLMModels.defaultModel,
-  //   //   "prompt": userInput,
-  //   // };
-
-  //   // // Write request body to the request
-  //   // request.write(jsonEncode(requestBody));
-
-  //   // // Send request and listen for response
-  //   // final response = await request.close();
-
-  //   // // Check response status code
-  //   // if (response.statusCode == HttpStatus.ok) {
-  //   //   // Process response
-  //   //   await for (final chunk in response.transform(utf8.decoder)) {
-  //   //     final jsonResponse = jsonDecode(chunk);
-  //   //     yield ChatResponseEntity.fromJson(jsonResponse);
-  //   //   }
-  //   // } else {
-  //   //   throw ServerException(not200ErrorMessage);
-  //   // }
-  // }
   @override
   Stream<ChatResponseEntity> getChatResponseFromServer({required String userInput}) async* {
     try {
@@ -97,8 +36,8 @@ class RemoteChatDatasource extends ChatDatasource {
         "model": baseModel,
         "prompt": userInput,
       };
-      String jsonString = json.encode(jsonMap);
-      List<int> bodyBytes = utf8.encode(jsonString);
+      String jsonString = json.encode(jsonMap);       // Converting to json string
+      List<int> bodyBytes = utf8.encode(jsonString);  // Encoding to bytes for http
       request.add(bodyBytes);
       HttpClientResponse response = await request.close();
       final responseMessage = [];
@@ -121,7 +60,9 @@ class RemoteChatDatasource extends ChatDatasource {
       debugPrint(e.toString());
       rethrow;
     } finally {
-      // _client.close(); // TODO: Un-comment?
+      // TODO: Un-comment? Mess around with backend server to view client connection staying open, will want to close this....
+      //       we will likely want to implement some form of logic that keeps client open for a certain amount of time
+      // _client.close();
     }
   }
 

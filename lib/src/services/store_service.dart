@@ -11,8 +11,11 @@ const String customModelKey = 'CustomModelKey';
 // DEFAULT
 // const String defaultUrl = 'localhost';
 const String defaultUrl = '192.168.4.153';
-const int defaultPort = 11434;
-const String defaultPath = '/api/generate';
+// TODO: Update port to be backend_port or something
+const int defaultPort = 8080;
+// TODO: Update defaultPath to be chat_path or something
+//       Also add in defaultpath for image endpoint
+const String defaultPath = '/chat';
 const String defaultModel = 'llama3.2';
 
 class StoreService {
@@ -45,12 +48,13 @@ class StoreService {
     if (res != null && res.isNotEmpty) {
       return res;
     } else {
+      // TODO: Keeping if statements in here just in the case where this might need to be handled in the future for some reason....
       // IF TESTING ON ANDROID EMULATOR
       // ELSE USE 127.0.0.1
       if (Platform.isAndroid) {
-        return '192.168.4.153';
+        return defaultUrl;
       } else if (Platform.isIOS) {
-        return '127.0.0.1';
+        return defaultUrl;
       } else {
         return defaultUrl;
       }

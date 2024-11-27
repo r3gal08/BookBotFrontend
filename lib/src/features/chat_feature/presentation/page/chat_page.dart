@@ -31,7 +31,7 @@ class _ChatPageState extends State<ChatPage> {
   String userName = 'User';
   String gpt = 'Bot';
 
-  List<String> messages = [];
+  List<String> messages = []; // TODO: Is a list such as this really required when using a backend? Likely not....
   final newMessage = [];
 
   final getCamerasService = getIt<GetCamerasService>();
@@ -152,48 +152,6 @@ class _ChatPageState extends State<ChatPage> {
                 },
               ),
             ),
-            // Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: Row(
-            //     children: [
-            //       Expanded(
-            //         child: TextField(
-            //           controller: _controller,
-            //           decoration: const InputDecoration(
-            //             hintText: 'Enter your message',
-            //           ),
-            //           onSubmitted: (v) {
-            //             sendMessage();
-            //           },
-            //         ),
-            //       ),
-            //       const SizedBox(width: 8.0),
-            //       StreamBuilder<bool>(
-            //           stream: loadingController,
-            //           builder: (context, snapshot) {
-            //             return ElevatedButton(
-            //               onPressed: (snapshot.hasData && snapshot.data == true)
-            //                   ? null
-            //                   : () {
-            //                       sendMessage();
-            //                     },
-            //               child: (snapshot.hasData && snapshot.data == true && mounted)
-            //                   ? const SizedBox(
-            //                       height: 20,
-            //                       width: 20,
-            //                       // child: CircularProgressIndicator(
-            //                       //   strokeWidth: 1,
-            //                       // ),
-            //                       child: SpinKitPulse(
-            //                         color: Colors.white,
-            //                         size: 20.0,
-            //                       ))
-            //                   : const Text('Send'),
-            //             );
-            //           }),
-            //     ],
-            //   ),
-            // ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(

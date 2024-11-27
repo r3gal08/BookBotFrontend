@@ -38,16 +38,19 @@ class _SettingsPageState extends State<SettingsPage> {
     super.dispose();
   }
 
+  // Async-await ensures that settings are loaded in the correct order without blocking the main thread...
+  // ? == null-aware operator which ensures that if a value is "null", the operation is skipped - preventing a runtime error
   Future<void> loadSettings() async {
     loadingController.add(true);
     baseUrlController?.text = await getIt<StoreService>().getBaseUrl();
-    basePortController?.text = "${await getIt<StoreService>().getPort()}";
+    basePortController?.text = "${await getIt<StoreService>().getPort()}";  // "${<DATA>}" == Convert to string
     basePathController?.text = await getIt<StoreService>().getPath();
     modelNameController?.text = await getIt<StoreService>().getModel();
     userNameController?.text = await getIt<StoreService>().getUser();
     loadingController.add(false);
   }
 
+  // Async-await ensures that settings are saved in the correct order without blocking the main thread...
   Future<void> saveSettings() async {
     await getIt<StoreService>().saveBaseUrl(baseUrl: baseUrlController?.text);
     await getIt<StoreService>().savePath(path: basePathController?.text);
@@ -84,7 +87,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     ElevatedButton(
                       onPressed: () async {
                         await saveSettings();
-                        Navigator.pop(context);
+                        Navigator.pop(context); // Return to main page when settings are saved...
                       },
                       child: const Text('Save'),
                     ),

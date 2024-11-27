@@ -57,8 +57,7 @@ class _ImageViewPageState extends State<ImageViewPage> {
       ),
       floatingActionButton: ElevatedButton(
         onPressed: () async {
-          // Example: Upload image to backend or perform another action
-          await sendImageToBackend(imageFile);
+          await sendImageToBackend(imageFile);  // Send image data to backend server
           Navigator.pop(context);
         },
         child: const Text("Send"),
@@ -108,8 +107,9 @@ class _ImageViewPageState extends State<ImageViewPage> {
   Future<void> sendImageToBackend(File imageFile) async {
     final bytes = await imageFile.readAsBytes();
 
+    // TODO: Maybe utilize what was done in remote_chat_source (looks a little cleaner...)
     final response = await http.post(
-      Uri.parse('http://<placeholder>:<placeholder>/upload'),  // TODO: Export to variable/settings file
+      Uri.parse('http://192.168.4.153:8080/image_upload'),  // TODO: Export to variable/settings file and use that
       headers: {
         'Content-Type': 'application/json',  // Sending JSON data
       },
