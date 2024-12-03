@@ -16,7 +16,6 @@ class _SettingsPageState extends State<SettingsPage> {
   late BehaviorSubject<bool> loadingController;
   late TextEditingController? baseUrlController;
   late TextEditingController? basePortController;
-  late TextEditingController? basePathController;
   late TextEditingController? modelNameController;
   late TextEditingController? userNameController;
 
@@ -25,7 +24,6 @@ class _SettingsPageState extends State<SettingsPage> {
     loadingController = BehaviorSubject.seeded(false);
     baseUrlController = TextEditingController();
     basePortController = TextEditingController();
-    basePathController = TextEditingController();
     modelNameController = TextEditingController();
     userNameController = TextEditingController();
     super.initState();
@@ -44,7 +42,6 @@ class _SettingsPageState extends State<SettingsPage> {
     loadingController.add(true);
     baseUrlController?.text = await getIt<StoreService>().getBaseUrl();
     basePortController?.text = "${await getIt<StoreService>().getPort()}";  // "${<DATA>}" == Convert to string
-    basePathController?.text = await getIt<StoreService>().getPath();
     modelNameController?.text = await getIt<StoreService>().getModel();
     userNameController?.text = await getIt<StoreService>().getUser();
     loadingController.add(false);
@@ -53,7 +50,6 @@ class _SettingsPageState extends State<SettingsPage> {
   // Async-await ensures that settings are saved in the correct order without blocking the main thread...
   Future<void> saveSettings() async {
     await getIt<StoreService>().saveBaseUrl(baseUrl: baseUrlController?.text);
-    await getIt<StoreService>().savePath(path: basePathController?.text);
     await getIt<StoreService>().savePort(port: int.tryParse(basePortController?.text ?? '') ?? 0);
     await getIt<StoreService>().saveModel(model: modelNameController?.text);
     await getIt<StoreService>().saveUser(user: userNameController?.text);
@@ -78,7 +74,6 @@ class _SettingsPageState extends State<SettingsPage> {
                 _buildTextField('User Name', userNameController),
                 _buildTextField('Base URL', baseUrlController),
                 _buildTextField('Base Port', basePortController),
-                _buildTextField('Base Path', basePathController),
                 _buildTextField('Model Name', modelNameController),
                 const SizedBox(height: 20),
                 Row(

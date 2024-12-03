@@ -1,0 +1,4 @@
+enum PayloadType {
+  text,
+  image,
+}

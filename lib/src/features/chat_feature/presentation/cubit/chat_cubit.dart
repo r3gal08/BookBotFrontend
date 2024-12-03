@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 import 'package:ollama_flutter_app/src/features/chat_feature/domain/entity/chat_response_entity.dart';
 import 'package:ollama_flutter_app/src/features/chat_feature/domain/usecase/get_chat_response_usecase.dart';
+import 'package:ollama_flutter_app/src/features/chat_feature/domain/enums/payload_type.dart';
 
 part 'chat_state.dart';
 
@@ -15,9 +16,9 @@ class ChatCubit extends Cubit<ChatState> {
 
   ChatCubit(this.usecase) : super(ChatInitial());
 
-  getChatResponse({required String userInput}) async {
+  getChatResponse({required String userInput, required PayloadType pType}) async {
     _responseSubscription?.cancel();
-    _responseSubscription = usecase.execute(userInput: userInput).listen(
+    _responseSubscription = usecase.execute(userInput: userInput, pType: pType).listen(
       (response) {
         if (response.done == false) {       // Checks if the response indicates an ongoing proces
           emit(ChatLoading());              // Emits a loading state to the UI.

@@ -1,21 +1,26 @@
 import 'dart:io';
 
+import 'package:ollama_flutter_app/src/features/chat_feature/domain/enums/payload_type.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+// Settings page keys
 const String userKey = 'UserKey';
 const String baseUrlKey = 'BaseUrlKey';
 const String portKey = 'PortKey';
-const String customPathKey = 'CustomPathKey';
 const String customModelKey = 'CustomModelKey';
 
-// DEFAULT
-// const String defaultUrl = 'localhost';
+// Network configuration
+const String localhostUrl = 'localhost';
+const int localPort = 11434;
 const String defaultUrl = '192.168.4.153';
-// TODO: Update port to be backend_port or something
 const int defaultPort = 8080;
-// TODO: Update defaultPath to be chat_path or something
-//       Also add in defaultpath for image endpoint
-const String defaultPath = '/chat';
+
+// End point configurations
+const String ollamaDirectPath = '/api/generate';
+const String chatEndpoint = '/chat';
+const String imageEndpoint = '/image';
+
+// Models
 const String defaultModel = 'llama3.2';
 
 class StoreService {
@@ -78,20 +83,16 @@ class StoreService {
     }
   }
 
-  // PATH  DETAILS
-  Future<void> savePath({required String? path}) async {
-    if (path == null || path.isEmpty) {
-      return;
-    }
-    await preferences.setString(customPathKey, path);
-  }
-
-  Future<String> getPath() async {
-    final res = preferences.getString(customPathKey);
-    if (res != null && res.isNotEmpty) {
-      return res;
-    } else {
-      return defaultPath;
+  // ENDPOINT  DETAILS
+  Future<String> getEndpoint(PayloadType pType) async {
+    switch (pType) {
+      case PayloadType.image:
+        return imageEndpoint;
+      case PayloadType.text:
+        //return chatEndpoint;
+        return ollamaDirectPath;
+      default:
+        throw Exception('Unsupported payload type: ${pType}');
     }
   }
 

@@ -10,6 +10,8 @@ import 'package:ollama_flutter_app/src/router/app_router.gr.dart';
 import 'package:ollama_flutter_app/src/services/store_service.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:ollama_flutter_app/src/services/get_cameras_service.dart';
+import 'package:ollama_flutter_app/src/features/chat_feature/domain/enums/payload_type.dart';
+
 
 // TODO: There must be a program that just visualizes/builds the presentation portion of these files
 
@@ -31,8 +33,7 @@ class _ChatPageState extends State<ChatPage> {
   String userName = 'User';
   String gpt = 'Bot';
 
-  List<String> messages = []; // TODO: Is a list such as this really required when using a backend? Likely not....
-  final newMessage = [];
+  List<String> messages = []; // Stores message chunks
 
   final getCamerasService = getIt<GetCamerasService>();
 
@@ -186,21 +187,6 @@ class _ChatPageState extends State<ChatPage> {
                     ),
                   ),
                   // Camera Button
-                  const SizedBox(width: 8.0),
-                  IconButton(
-                    icon: const Icon(Icons.camera_alt, color: Colors.green), // Camera icon color
-                    onPressed: () {
-                      if (getCamerasService.hasCameras) {
-                        // Navigate to the camera route if cameras are available
-                        context.router.push(CameraRoute(cameras: getCamerasService.cameras));
-                      } else {
-                        // Show an alert if no cameras are available
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text("No cameras available")),
-                        );
-                      }
-                    },
-                  ),
                   // Send Button
                   const SizedBox(width: 8.0),
                   StreamBuilder<bool>(
@@ -242,6 +228,21 @@ class _ChatPageState extends State<ChatPage> {
                       );
                     },
                   ),
+                  const SizedBox(width: 8.0),
+                  IconButton(
+                    icon: const Icon(Icons.camera_alt, color: Colors.green), // Camera icon color
+                    onPressed: () {
+                      if (getCamerasService.hasCameras) {
+                        // Navigate to the camera route if cameras are available
+                        context.router.push(CameraRoute(cameras: getCamerasService.cameras));
+                      } else {
+                        // Show an alert if no cameras are available
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text("No cameras available")),
+                        );
+                      }
+                    },
+                  ),
                 ],
               ),
             ),
@@ -258,8 +259,7 @@ class _ChatPageState extends State<ChatPage> {
       messages.add('$gpt : ');
       messagesController.add(messages);
       loadingController.add(true);
-      context.read<ChatCubit>().getChatResponse(userInput: message);
-      // newMessage.add(message); // Add the user message to the list of new messages
+      context.read<ChatCubit>().getChatResponse(userInput: message, pType: PayloadType.image);
       _controller.clear();
     }
   }
